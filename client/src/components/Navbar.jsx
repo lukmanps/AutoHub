@@ -11,7 +11,7 @@ const Navbar = () => {
         <div>
           <Link to={'/'}>
             <h1 className='font-bold text-lg sm:text-xl flex flex-wrap'>
-              <span className='text-primary-normal'>Auto</span>
+              <span className='text-slate-500'>Auto</span>
               <span className='text-secondary'>Hub</span>
             </h1>
           </Link>
@@ -35,11 +35,9 @@ const Navbar = () => {
 
         <div className='flex gap-5'>
           <Link to={'login'}>
-            <button className='bg-primary-normal font-bold text-slate-50 rounded-full px-6 py-2 hover:bg-primary-dark'>
+            <button className='bg-secondary font-bold text-slate-50 rounded-lg px-6 py-2 hover:bg-slate-500'>
               Login</button>
           </Link>
-
-          <Button contained>Nothing</Button>
         </div>
       </div>
     </header>

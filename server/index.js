@@ -1,17 +1,17 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config();
+import connectDB from './config/db.js';
 
+import userRouter from './routes/user.route.js';
 const app = express();
 
-mongoose.connect(process.env.MONGODB_URL).then(()=> {
-    console.log('***** Connected To Database *****');
-}).catch(() => {
-    console.log('Database connection failed!')
-})
+
+//Database Connection
+connectDB();
 
 const port = 3000;
 app.listen(port, () => {
     console.log(`::::: Server Started on Port: ${port} :::::`);
-})
+});
+
+app.use('/api/user', userRouter);
+
