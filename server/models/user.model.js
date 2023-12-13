@@ -4,7 +4,6 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true
     },
 
     email: {
@@ -19,6 +18,6 @@ const userSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-const user = mongoose.Model('User', userSchema);
+const userCollection = mongoose.model('User', userSchema);
 
-export default user;
+export default userCollection;
