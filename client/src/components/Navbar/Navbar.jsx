@@ -1,12 +1,12 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Button from './elements/Button';
+import Button from '../elements/Button';
 
 
 const Navbar = () => {
   return (
-    <header className='bg-slate-100 shadow-md'>
+    <div className='bg-slate-100 shadow-md'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-1 '>
         <div>
           <Link to={'/'}>
@@ -17,7 +17,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <ul className='flex gap-4'>
+        <ul className='flex gap-5'>
           <li className='hidden sm:inline text-secondary'>Home</li>
           <li className='hidden sm:inline text-secondary'>About</li>
           <li className='hidden sm:inline text-secondary'>Contact</li>
@@ -35,12 +35,12 @@ const Navbar = () => {
 
         <div className='flex gap-5'>
           <Link to={'login'}>
-            <button className='bg-secondary font-bold text-slate-50 rounded-lg px-6 py-2 hover:bg-slate-500'>
+            <button className='bg-secondary font-bold text-slate-50 rounded-lg px-6 py-2 hover:bg-light-gray'>
               Login</button>
           </Link>
         </div>
       </div>
-    </header>
+    </div>
   )
 }
 
