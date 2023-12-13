@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Button from './elements/Button';
 
 
 const Navbar = () => {
@@ -32,11 +33,13 @@ const Navbar = () => {
           </form>
         </div>
 
-        <div>
+        <div className='flex gap-5'>
           <Link to={'login'}>
             <button className='bg-primary-normal font-bold text-slate-50 rounded-full px-6 py-2 hover:bg-primary-dark'>
               Login</button>
           </Link>
+
+          <Button contained>Nothing</Button>
         </div>
       </div>
     </header>
