@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 //Pages
 import Home from './pages/Home';
@@ -13,6 +14,7 @@ const App = () => {
   return (
     <BrowserRouter>
     <Navbar />
+    <Toaster />
       <Routes>
         <Route path='/' element={ <Home />} />
         <Route path='/login' element={<Login />} />

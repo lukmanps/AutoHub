@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'
 import connectDB from './config/db.js';
 
 //Routers
@@ -17,10 +18,13 @@ app.listen(port, () => {
     console.log(`::::: Server Started on Port: ${port} :::::`);
 });
 
+//Enable CORS
+app.use(cors());
+
 app.use(express.json());
 
 //Routes
-app.use('/api/user', userRouter);
+app.use('/api', userRouter);
 app.use('/api/auth', authRouter);
 
 //Error-Handling Middleware

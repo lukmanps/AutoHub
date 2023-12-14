@@ -1,10 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { handleRegister } from '../services/auth/auth.service';
+import toast from 'react-hot-toast'
 
 const Signup = () => {
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const {register, handleSubmit, formState: {errors}, getValues} = useForm();
+  const navigate = useNavigate();
+  
+  const onSubmit = async(data) => {
+    setLoading(true);
+    try{
+      const response = await handleRegister(data);
+      if(response){
+        toast.success('Registered Successfully');
+        navigate('/login');
+        setLoading(false);
+      }
+    } catch(err){
+      console.log(err)
+      setLoading(false);
+      setError(err.data.message);
+    }
+  }
   return (
     <div>
-
       <div className='text-center my-8'>
         <h1 className='text-secondary text-3xl font-bold '>Register</h1>
         <span className='text-light-gray font-normal'>Already have an account?</span>
@@ -14,38 +36,74 @@ const Signup = () => {
       </div>
 
       <div className='max-w-xs sm:max-w-sm mx-auto'>
-        <form className='flex flex-col gap-3'>
+        <form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
             id='username'
             type='text'
-            placeholder='Username' />
+            placeholder='Username'
+            {...register('username', {
+              required: true,
+              pattern: /^[a-zA-Z0-9_-]{3,16}$/
+            })} />
+            {errors.username && <p className='text-primary-dark text-sm'>Invalid Username</p>}
 
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
             id='email'
             type='text'
-            placeholder='Email' />
+            placeholder='Email' 
+            {...register('email', {
+              required: true,
+              pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+            })}/>
+            {errors.email && <p className='text-primary-dark text-sm'>Invalid Email</p>}
 
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
-            id='phoneNo'
+            id='phoneNumber'
             type='tel'
-            placeholder='Phone Number' />
+            placeholder='Phone Number' 
+            {...register('phoneNumber', {
+              required: true,
+              minLength: 10
+            })}/>
+            {errors.phoneNumber && <p className='text-primary-dark text-sm'>Invalid Phone Number</p>}
 
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
             id='password'
             type='password'
-            placeholder='Password' />
+            placeholder='Password'
+            {...register('password', {
+              required: 'Invalid Password',
+              minLength: {
+                value: 6,
+                message: 'Password should contain atleast 6 characters'
+              }
+            })} 
+            error = {Boolean(errors.password)}/>
+            {errors.password && <p className='text-primary-dark text-sm'>{errors.password.message}</p>}
+            
 
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
-            id='confirm-password'
+            id='confirmPassword'
             type='password'
-            placeholder='Confirm Password' />
+            placeholder='Confirm Password' 
+            {...register('confirmPassword', {
+              required: true,
+              validate: (value) => (value) === getValues('password') || 'Password does not match'
+            })}
+            error = {Boolean(errors.confirmPassword)}/>
+            {errors.confirmPassword && <p className='text-primary-dark text-sm'>{errors.confirmPassword.message}</p>}
 
-          <button className='bg-secondary py-3 my-3 text-slate-100 font-medium rounded-lg hover:opacity-90'>Signup</button>
+            {error && <p className='text-primary-dark text-sm'>{error}</p>}
+          <button 
+          disabled={loading}
+          className='bg-secondary py-3 my-3 text-slate-100 font-medium rounded-lg hover:opacity-90'
+          type='submit'
+          >{loading ? 'Loading...' : 'Signup'}</button>
         </form>
       </div>
 

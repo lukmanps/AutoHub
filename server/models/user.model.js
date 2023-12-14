@@ -12,15 +12,17 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
 
-    password: {
+    phoneNumber: {
         type: String,
         required: true,
     },
 
-    phoneNumber: {
+    password: {
         type: String,
         required: true,
-    }
+    },
+    
+
     
 }, {timestamps: true});
 
