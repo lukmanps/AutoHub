@@ -9,7 +9,7 @@ export default {
       transparent: 'transparent',
       current: 'currentColor',
       'primary': {
-        normal : '#ff0000',
+        normal: '#ff0000',
         light: '#ff2121',
         dark: '#d10202'
       },
@@ -17,7 +17,7 @@ export default {
       'light-gray': '#55585b',
       'ash-gray': '888b8e',
       'light-ash-gray': '#cacdd0',
-      'white':'ffffff',
+      'white': 'ffffff',
       'slate': {
         50: '#f8fafc',
         100: '#f1f5f9',
@@ -34,8 +34,25 @@ export default {
     },
 
     fontFamily: {
-      sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
-      serif: ['Merriweather', 'serif'],
+      sans: [
+        'ui-sans-serif',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        "Segoe UI", 
+        'Roboto',
+        "Helvetica Neue", 
+        'Arial',
+        "Noto Sans", 
+        'sans-serif',
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji"],
+
+        serif: ['ui-serif', 'Georgia', 'Cambria', "Times New Roman", 'Times', 'serif'],
+
+        mono: ['FMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace']
     },
 
     extend: {},

@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { handleRegister } from '../services/auth/auth.service';
-import toast from 'react-hot-toast'
+import { handleLogin } from '../services/auth/auth.service';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  loginStart, 
+  loginSuccess, 
+  loginFailed
+} from '../redux/user/userSlice'
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
-  const {register, handleSubmit, formState: {errors}, getValues} = useForm();
+  const { loading, error } = useSelector((state) => state.user);
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    dispatch(loginStart());
+    try {
+      const response = await handleLogin(data);
+      if ( response ) {
+        dispatch(loginSuccess(response))
+        navigate('/');
+      }
+    } catch (error) {
+      dispatch(loginFailed(error));
+    }
   }
   return (
     <div>
@@ -29,14 +44,14 @@ const Login = () => {
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
             id='email'
             type='text'
-            placeholder='Email' 
+            placeholder='Email'
             {...register('email', {
               required: true,
               pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-            })}/>
-            {errors.email && <p className='text-primary-dark text-sm'>Invalid Email</p>}
+            })} />
+          {errors.email && <p className='text-primary-dark text-sm'>Invalid Email</p>}
 
-          
+
 
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
@@ -49,17 +64,18 @@ const Login = () => {
                 value: 6,
                 message: 'Password should contain atleast 6 characters'
               }
-            })} 
-            error = {Boolean(errors.password)}/>
-            {errors.password && <p className='text-primary-dark text-sm'>{errors.password.message}</p>}
-            
+            })}
+            error={Boolean(errors.password)} />
+          {errors.password && <p className='text-primary-dark text-sm'>{errors.password.message}</p>}
 
-      
-          <button 
-          disabled={loading}
-          className='bg-secondary py-3 my-3 text-slate-100 font-medium rounded-lg hover:opacity-90'
-          type='submit'
+          {error && <p className='text-primary-dark text-center text-sm'>{error}</p>}
+
+          <button
+            disabled={loading}
+            className='bg-secondary py-3 my-3 text-slate-100 font-medium rounded-lg hover:opacity-90'
+            type='submit'
           >{loading ? 'Loading...' : 'Login'}</button>
+
         </form>
       </div>
 

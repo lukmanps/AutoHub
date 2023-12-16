@@ -24,13 +24,13 @@ export const login = async (req, res, next) => {
         const validUser = await userCollection.findOne({ email });
         if (!validUser) return next(errorHandler(404, 'User not found!'));
         const validPassword = await bcrypt.compare(password, validUser.password);
-        if (!validPassword) return next(errorHandler(401, 'Wrong Credential'));
+        if (!validPassword) return next(errorHandler(401, 'Wrong Credentials!'));
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_KEY);
+        console.log(token, 'token');
         const {password: pass,__v, updatedAt, ...data} = validUser._doc;
-        console.log(data);
         res
-        .cookie('access-token', token, {httpOnly: true})
         .status(200)
+        .cookie('access-token', token, {maxAge: 86400, httpOnly: true})
         .json(data)
     } catch (err) {
         next(err);
