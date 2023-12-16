@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form';
 import { handleLogin } from '../services/auth/auth.service';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  loginStart, 
-  loginSuccess, 
+  loginStart,
+  loginSuccess,
   loginFailed
-} from '../redux/user/userSlice'
+} from '../redux/user/userSlice';
+import OAuth from '../components/elements/Oauth';
 
 const Login = () => {
   const { loading, error } = useSelector((state) => state.user);
@@ -19,7 +20,7 @@ const Login = () => {
     dispatch(loginStart());
     try {
       const response = await handleLogin(data);
-      if ( response ) {
+      if (response) {
         dispatch(loginSuccess(response))
         navigate('/');
       }
@@ -72,11 +73,17 @@ const Login = () => {
 
           <button
             disabled={loading}
-            className='bg-secondary py-3 my-3 text-slate-100 font-medium rounded-lg hover:opacity-90'
+            className='bg-secondary py-3 my-2 text-slate-100 font-medium rounded-lg hover:opacity-90'
             type='submit'
           >{loading ? 'Loading...' : 'Login'}</button>
 
         </form>
+
+        <div className='flex flex-col justify-center text-center gap-2'>
+          <p>or</p>
+          <OAuth />
+        </div>
+
       </div>
 
     </div>

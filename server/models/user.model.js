@@ -14,13 +14,17 @@ const userSchema = new mongoose.Schema({
 
     phoneNumber: {
         type: String,
-        required: true,
     },
 
     password: {
         type: String,
         required: true,
     },
+
+    profileImage: {
+        type: String,
+        default: 'https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png'
+    }
     
 
     

@@ -26,17 +26,48 @@ export const login = async (req, res, next) => {
         const validPassword = await bcrypt.compare(password, validUser.password);
         if (!validPassword) return next(errorHandler(401, 'Wrong Credentials!'));
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_KEY);
-        console.log(token, 'token');
-        const {password: pass,__v, updatedAt, ...data} = validUser._doc;
+        const { password: pass, __v, updatedAt, ...data } = validUser._doc;
         res
-        .status(200)
-        .cookie('access-token', token, {maxAge: 86400, httpOnly: true})
-        .json(data)
+            .status(200)
+            .cookie('access-token', token, { maxAge: 86400, httpOnly: true })
+            .json(data)
     } catch (err) {
         next(err);
     }
 }
 
+export const signInWithGoogle = async (req, res, next) => {
+    const { username, email, photo } = req.body;
+    try {
+        const user = await userCollection.findOne({ email });
+        if (user) {
+            const token = jwt.sign({ id: user._id }, process.env.JWT_KEY);
+            const { password: pass, __v, updatedAt, ...data } = user._doc;
+            res
+                .status(200)
+                .cookie('access-token', token, { maxAge: 86400, httpOnly: true })
+                .json(data);
+        } else {
+            const generatedPassword = Math.random().toString(36).slice(-8);
+            const hashedPassword = await bcrypt.hash(generatedPassword, 10);
+            const newUser = new userCollection({
+                username: username.split(" ").join("").toLowerCase(),
+                email: email,
+                password: hashedPassword,
+                profileImage: photo
+            });
+            await newUser.save();
+            const token = jwt.sign({ id: newUser._id }, process.env.JWT_KEY);
+            const { password: pass, __v, updatedAt, ...data } = newUser._doc;
+            res
+                .status(200)
+                .cookie('access-token', token, { maxAge: 86400, httpOnly: true })
+                .json(data);
+        }
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 

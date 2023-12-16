@@ -18,3 +18,12 @@ export const handleLogin = async(data) => {
         throw error.response.data.message
     }
 }
+
+export const handleOAuth = async(data) => {
+    try {
+        const response = await Axios.post('/auth/Oauth', data);
+        return response.data
+    } catch (error) {
+        throw error.response.data.message;
+    }
+}
