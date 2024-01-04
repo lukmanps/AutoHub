@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { handleRegister } from '../services/auth/auth.service';
 import toast from 'react-hot-toast';
-import OAuth from '../components/elements/Oauth';
+import OAuth from '../components/OAuth/OAuth';
 
 const Signup = () => {
   const [error, setError] = useState(null);
@@ -29,8 +29,8 @@ const Signup = () => {
   return (
     <div>
       <div className='text-center my-8'>
-        <h1 className='text-secondary text-3xl font-bold '>Register</h1>
-        <span className='text-light-gray font-normal'>Already have an account?</span>
+        <h1 className='text-gray-800 text-3xl font-bold'>Register</h1>
+        <span className='text-gray-600 font-normal'>Already have an account?</span>
         <Link to={'/login'}>
           <span className='hover: text-slate-800'> Login</span>
         </Link>
@@ -47,7 +47,7 @@ const Signup = () => {
               required: true,
               pattern: /^[a-zA-Z0-9_-]{3,16}$/
             })} />
-          {errors.username && <p className='text-primary-dark text-sm'>Invalid Username</p>}
+          {errors.username && <p className='text-red-700 text-sm'>Invalid Username</p>}
 
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
@@ -58,7 +58,7 @@ const Signup = () => {
               required: true,
               pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
             })} />
-          {errors.email && <p className='text-primary-dark text-sm'>Invalid Email</p>}
+          {errors.email && <p className='text-red-700 text-sm'>Invalid Email</p>}
 
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
@@ -69,7 +69,7 @@ const Signup = () => {
               required: true,
               minLength: 10
             })} />
-          {errors.phoneNumber && <p className='text-primary-dark text-sm'>Invalid Phone Number</p>}
+          {errors.phoneNumber && <p className='text-red-700 text-sm'>Invalid Phone Number</p>}
 
           <input
             className='shadow-sm  p-3 rounded-lg focus:shadow-lg outline-none'
@@ -84,7 +84,7 @@ const Signup = () => {
               }
             })}
             error={Boolean(errors.password)} />
-          {errors.password && <p className='text-primary-dark text-sm'>{errors.password.message}</p>}
+          {errors.password && <p className='text-red-700 text-sm'>{errors.password.message}</p>}
 
 
           <input
@@ -97,12 +97,12 @@ const Signup = () => {
               validate: (value) => (value) === getValues('password') || 'Password does not match'
             })}
             error={Boolean(errors.confirmPassword)} />
-          {errors.confirmPassword && <p className='text-primary-dark text-sm'>{errors.confirmPassword.message}</p>}
+          {errors.confirmPassword && <p className='text-red-700 text-sm'>{errors.confirmPassword.message}</p>}
 
-          {error && <p className='text-primary-dark text-sm'>{error}</p>}
+          {error && <p className='text-red-700 text-sm'>{error}</p>}
           <button
             disabled={loading}
-            className='bg-secondary py-3 mt-3 text-slate-100 font-medium rounded-lg hover:opacity-90'
+            className='bg-gray-900 py-3 mt-3 text-slate-100 font-medium rounded-lg hover:opacity-90'
             type='submit'
           >{loading ? 'Loading...' : 'Signup'}</button>
           

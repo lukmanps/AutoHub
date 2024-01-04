@@ -8,7 +8,7 @@ import {
   loginSuccess,
   loginFailed
 } from '../redux/user/userSlice';
-import OAuth from '../components/elements/Oauth';
+import OAuth from '../components/OAuth/OAuth';
 
 const Login = () => {
   const { loading, error } = useSelector((state) => state.user);
@@ -50,7 +50,7 @@ const Login = () => {
               required: true,
               pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
             })} />
-          {errors.email && <p className='text-primary-dark text-sm'>Invalid Email</p>}
+          {errors.email && <p className='text-red-700 text-sm'>Invalid Email</p>}
 
 
 
@@ -67,13 +67,13 @@ const Login = () => {
               }
             })}
             error={Boolean(errors.password)} />
-          {errors.password && <p className='text-primary-dark text-sm'>{errors.password.message}</p>}
+          {errors.password && <p className='text-red-700 text-sm'>{errors.password.message}</p>}
 
-          {error && <p className='text-primary-dark text-center text-sm'>{error}</p>}
+          {error && <p className='text-red-700 text-center text-sm'>{error}</p>}
 
           <button
             disabled={loading}
-            className='bg-secondary py-3 my-2 text-slate-100 font-medium rounded-lg hover:opacity-90'
+            className='bg-gray-800 py-3 my-2 text-slate-100 font-medium rounded-lg hover:opacity-90'
             type='submit'
           >{loading ? 'Loading...' : 'Login'}</button>
 

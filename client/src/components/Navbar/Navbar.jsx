@@ -1,10 +1,12 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Button from '../elements/Button';
+import { useSelector } from 'react-redux';
+import DropDownMenu from '../elements/DropDownMenu';
 
 
 const Navbar = () => {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <div className='bg-slate-100 shadow-md'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-1 '>
@@ -33,11 +35,14 @@ const Navbar = () => {
           </form>
         </div>
 
-        <div className='flex gap-5'>
-          <Link to={'login'}>
-            <button className='bg-secondary font-bold text-slate-50 rounded-lg px-6 py-2 hover:bg-light-gray'>
-              Login</button>
-          </Link>
+        <div className='flex gap-1'>
+          {currentUser ?
+            <DropDownMenu user={currentUser} /> :
+            <Link to={'login'}>
+              <button className='bg-gray-800 font-bold text-slate-50 rounded-lg px-6 py-2 hover:bg-light-gray'>
+                Login</button>
+            </Link>
+          }
         </div>
       </div>
     </div>

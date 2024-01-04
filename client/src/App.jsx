@@ -9,18 +9,21 @@ import Signup from './pages/Signup';
 import About from './pages/About';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar/Navbar';
+import { PrivateRoute } from './routes/private/PrivateRoute';
 
 const App = () => {
   return (
     <BrowserRouter>
-    <Navbar />
-    <Toaster />
+      <Navbar />
+      <Toaster />
       <Routes>
-        <Route path='/' element={ <Home />} />
+        <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Signup />} />
         <Route path='/about' element={<About />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route element={<PrivateRoute />}>
+          <Route path='/profile' element={<Profile />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
