@@ -29,7 +29,7 @@ export const login = async (req, res, next) => {
         const { password: pass, __v, updatedAt, ...data } = validUser._doc;
         res
             .status(200)
-            .cookie('access-token', token, { maxAge: 86400, httpOnly: true })
+            .cookie('access_token', token, { maxAge: 86400, httpOnly: true })
             .json(data)
     } catch (err) {
         next(err);
@@ -45,7 +45,7 @@ export const signInWithGoogle = async (req, res, next) => {
             const { password: pass, __v, updatedAt, ...data } = user._doc;
             res
                 .status(200)
-                .cookie('access-token', token, { maxAge: 86400, httpOnly: true })
+                .cookie('access_token', token, { maxAge: 86400, httpOnly: true })
                 .json(data);
         } else {
             const generatedPassword = Math.random().toString(36).slice(-8);
@@ -61,7 +61,7 @@ export const signInWithGoogle = async (req, res, next) => {
             const { password: pass, __v, updatedAt, ...data } = newUser._doc;
             res
                 .status(200)
-                .cookie('access-token', token, { maxAge: 86400, httpOnly: true })
+                .cookie('access_token', token, { maxAge: 86400, httpOnly: true })
                 .json(data);
         }
     } catch (error) {
