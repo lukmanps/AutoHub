@@ -99,7 +99,7 @@ const Signup = () => {
             error={Boolean(errors.confirmPassword)} />
           {errors.confirmPassword && <p className='text-red-700 text-sm'>{errors.confirmPassword.message}</p>}
 
-          {error && <p className='text-red-700 text-sm'>{error}</p>}
+          {error && <p className='text-red-700 text-sm text-center'>{error}</p>}
           <button
             disabled={loading}
             className='bg-gray-900 py-3 mt-3 text-slate-100 font-medium rounded-lg hover:opacity-90'

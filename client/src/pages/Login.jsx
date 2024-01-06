@@ -50,7 +50,7 @@ const Login = () => {
               required: true,
               pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
             })} />
-          {errors.email && <p className='text-red-700 text-sm'>Invalid Email</p>}
+          {errors.email && <p className='text-red-700 text-sm' key={error.key}>Invalid Email</p>}
 
 
 
@@ -69,7 +69,7 @@ const Login = () => {
             error={Boolean(errors.password)} />
           {errors.password && <p className='text-red-700 text-sm'>{errors.password.message}</p>}
 
-          {error && <p className='text-red-700 text-center text-sm'>{error}</p>}
+          {error && <p className='text-red-700 text-center text-sm' key={error.key}>{error}</p>}
 
           <button
             disabled={loading}

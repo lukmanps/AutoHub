@@ -20,7 +20,11 @@ app.listen(port, () => {
 });
 
 //Enable CORS
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true, // Allow cookies to be sent with the request
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

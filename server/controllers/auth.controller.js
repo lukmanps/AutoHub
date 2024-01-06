@@ -14,6 +14,7 @@ export const signup = async (req, res, next) => {
         await newUser.save();
         res.status(201).json('User created successfully!');
     } catch (err) {
+        err.message = 'User already exists'
         next(err);
     }
 }
@@ -27,10 +28,7 @@ export const login = async (req, res, next) => {
         if (!validPassword) return next(errorHandler(401, 'Wrong Credentials!'));
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_KEY);
         const { password: pass, __v, updatedAt, ...data } = validUser._doc;
-        res
-            .status(200)
-            .cookie('access_token', token, { maxAge: 86400, httpOnly: true })
-            .json(data)
+        res.cookie('access_token', token, { maxAge: 86400, httpOnly: true }).status(200).json(data);
     } catch (err) {
         next(err);
     }

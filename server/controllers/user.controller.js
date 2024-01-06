@@ -9,9 +9,11 @@ export const test = (req, res) => {
 }
 
 export const updateUser = async(req, res, next) => {
+    console.log(req.user, " :: USer deaitla");
     if(req.user.id !== req.params.id) return next(errorHandler(401, 'You can only update your account!'));
 
     try {
+        console.log(req.body);
         if(req.body.password) {
             req.body.password = await bcrypt(req.body.password, 10);
         }
@@ -25,7 +27,7 @@ export const updateUser = async(req, res, next) => {
             }
         }, {new: true});
         
-        const {password, ...data} = updatedUser._doc;
+        const {password, __v, updatedAt, ...data} = updatedUser._doc;
 
         res.status(200).json(data);
         

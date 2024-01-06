@@ -1,5 +1,6 @@
 import Axios from '../../config/axios.config';
 
+
 export const handleRegister = async(data) => {
     try{
         const response = await Axios.post('/auth/register', data);
@@ -13,6 +14,7 @@ export const handleRegister = async(data) => {
 export const handleLogin = async(data) => {
     try {
         const response = await Axios.post('/auth/login', data);
+        console.log(response);
         return response.data;
     } catch (error) {
         throw error.response.data.message
