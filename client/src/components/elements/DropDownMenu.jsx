@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaUserCog, FaSignOutAlt, FaRegSun } from 'react-icons/fa';
+import { signOut } from '../../services/auth/signout.service';
+import { signOutSuccess } from '../../redux/user/userSlice';
+import { useDispatch } from 'react-redux'
 
 
 const DropDownMenu = ({ user }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const toggling = () => {
         setIsOpen(!isOpen);
     }
+
+    const handleSignout = async() => {
+        const response = await signOut();
+        if(response){
+            dispatch(signOutSuccess());
+            navigate('/');
+        }
+    }
+
     return (
         <>
             <div className='relative cursor-pointer'>
@@ -42,7 +56,7 @@ const DropDownMenu = ({ user }) => {
                         </ul>
                         <div className="py-2 px-3 flex items-center rounded-lg hover:bg-gray-300">
                             <FaSignOutAlt />
-                            <a href="#" className="block px-4 py-2 text-sm font-medium text-primary-dark ">Sign out</a>
+                            <p onClick={handleSignout} className="block px-4 py-2 text-sm font-medium text-primary-dark cursor-pointer">Sign out</p>
                         </div>
                     </div>}
 
