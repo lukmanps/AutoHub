@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 //Routers
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
+import listingRouter from './routes/listing.route.js';
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(cookieParser());
 //Routes
 app.use('/api', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/listing', listingRouter);
 
 //Error-Handling Middleware
 app.use((err, req, res, next) => {
