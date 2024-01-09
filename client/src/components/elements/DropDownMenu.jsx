@@ -29,7 +29,7 @@ const DropDownMenu = ({ user }) => {
                 <div className='flex items-center gap-0' onClick={toggling}>
                     <img src={user.profileImage}
                         alt='profile'
-                        className='rounded-full h-12 w-12 object-cover' />
+                        className='rounded-full h-12 w-12 object-cover md:{h-8 w-8}' />
                     <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                     </svg>

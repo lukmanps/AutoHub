@@ -55,7 +55,7 @@ const Profile = () => {
           <h1 className='text-gray-800 text-3xl font-bold'>Profile</h1>
         </div>
 
-        <div className='max-w-md sm:max-w-sm mx-auto'>
+        <div className='max-w-xs sm:max-w-sm mx-auto'>
           <form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
             <div className='self-center'>
               <img
