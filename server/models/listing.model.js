@@ -32,7 +32,7 @@ const listingSchema = new mongoose.Schema(
             required: true
         },
 
-        body_type: {
+        bodyType: {
             type: String,
             required: true
         },
@@ -45,8 +45,8 @@ const listingSchema = new mongoose.Schema(
         },
 
         user: {
-            type: String,
-            required: true
+            type: mongoose.Schema.ObjectId,
+            ref: 'User'
         }
     }, { timestamps: true}
 );
