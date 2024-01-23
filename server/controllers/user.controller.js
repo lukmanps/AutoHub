@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import userCollection from '../models/user.model.js';
+import listingCollection from '../models/listing.model.js';
 import { errorHandler } from '../utils/error.js';
 
 export const test = (req, res) => {
@@ -33,5 +34,28 @@ export const updateUser = async(req, res, next) => {
         
     } catch (error) {
         next(error);
+    }
+}
+
+export const getUserListing = async(req, res, next) => {
+    if(req.user.id === req.params.id) {
+        try {
+            const listing = await listingCollection.aggregate([
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'user',
+                        foreignField: '_id',
+                        as: 'listings'
+                    }
+                }
+            ])
+
+            console.log(listing, ":: User Listings");
+        } catch (error) {
+            next(error);
+        }
+    } else {
+       return next(errorHandler(401, 'User not logged in!'))
     }
 }

@@ -14,14 +14,13 @@ const submitListing = async(data, user) => {
             imageURLs: data.imageURLs,
             user: user
         }
-        const response = await Axios.post('/listing/create', data);
+        const response = await Axios.post('/listing/create', listingData);
         if(response.data){
             console.log(response);
             return response.data;
         }
     } catch (error) {
         throw error;
-        console.log(error);
     }
 }
 

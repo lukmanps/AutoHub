@@ -61,8 +61,12 @@ const CreateListing = () => {
     }));
     console.log(formData);
     try {
-      await submitListing(formData, currentUser._id);
-      toast.success('Listed Successfully');
+      if(formData.imageURLs.length > 1) {
+        await submitListing(formData, currentUser._id);
+        toast.success('Listed Successfully');
+      } else {
+        toast.error('Upload atleast 1 image to List');
+      }
     } catch (error) {
       toast.error('Something went wrong. Try again!');
     }
