@@ -1,4 +1,5 @@
-import listingCollection from "../models/listing.model.js"
+import listingCollection from "../models/listing.model.js";
+import { errorHandler } from "../utils/error.js";
 
 export const createListing = async(req, res, next) => {
     console.log(req.body);
@@ -8,5 +9,29 @@ export const createListing = async(req, res, next) => {
     } catch (error) {
         console.log(error, " :: Error!");
         next(error)
+    }
+}
+
+export const getUserListing = async(req, res, next) => {
+    if(req.params.id) {
+        try {
+            const listing = await listingCollection.aggregate([
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'user',
+                        foreignField: '_id',
+                        as: 'listings'
+                    }
+                }
+            ])
+
+            console.log(listing, ":: User Listings");
+            res.status(200).json(listing);
+        } catch (error) {
+            next(error);
+        }
+    } else {
+       return next(errorHandler(401, 'User not logged in!'))
     }
 }

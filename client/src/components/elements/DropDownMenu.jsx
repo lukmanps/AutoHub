@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import { FaUserCog, FaSignOutAlt, FaRegSun } from 'react-icons/fa';
+import { FaUserCog, FaSignOutAlt, FaRegSun, FaClipboardCheck } from 'react-icons/fa';
 import { signOut } from '../../services/auth/signout.service';
 import { signOutSuccess } from '../../redux/user/userSlice';
 import { useDispatch } from 'react-redux'
@@ -48,6 +48,10 @@ const DropDownMenu = ({ user }) => {
                             <li className='flex items-center rounded-lg px-3 hover:bg-gray-300'>
                                 <FaUserCog />
                                 <Link className="block px-4 py-2" to={'profile'}>Profile</Link>
+                            </li>
+                            <li className='flex items-center rounded-lg px-3 hover:bg-gray-300'>
+                                <FaClipboardCheck />
+                                <Link className="block px-4 py-2" to={'user-listing'}>My Listings</Link>
                             </li>
                             <li className='flex items-center rounded-lg px-3 hover:bg-gray-300'>
                                 <FaRegSun />

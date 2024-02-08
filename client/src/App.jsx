@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import Navbar from './components/Navbar/Navbar';
 import { PrivateRoute } from './routes/private/PrivateRoute';
 import CreateListing from './pages/CreateListing';
+import UserListings from './pages/UserListings';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/create-listing' element={ <CreateListing />} />
+          <Route path='/user-listing' element={<UserListings />} />
         </Route>
       </Routes>
     </BrowserRouter>
