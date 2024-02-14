@@ -12,6 +12,7 @@ import Navbar from './components/Navbar/Navbar';
 import { PrivateRoute } from './routes/private/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import UserListings from './pages/UserListings';
+import Listing from './pages/Listing';
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/listing/:id' element={<Listing />} />
+        
         <Route path='/register' element={<Signup />} />
         <Route path='/about' element={<About />} />
         <Route element={<PrivateRoute />}>

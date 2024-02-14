@@ -25,7 +25,7 @@ const DropDownMenu = ({ user }) => {
 
     return (
         <>
-            <div className='relative cursor-pointer'>
+            <div className='relative cursor-pointer z-50'>
                 <div className='flex items-center gap-0' onClick={toggling}>
                     <img src={user.profileImage}
                         alt='profile'

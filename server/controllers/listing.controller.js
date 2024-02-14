@@ -35,3 +35,12 @@ export const getUserListing = async(req, res, next) => {
        return next(errorHandler(401, 'User not logged in!'))
     }
 }
+
+export const getListing = async(req, res, next) => {
+    try {
+        const listing = await listingCollection.findById(req.params.id);
+        res.status(200).json(listing);
+    } catch (error) {
+        return next(errorHandler(500, "Internal Server Error"));
+    }
+}

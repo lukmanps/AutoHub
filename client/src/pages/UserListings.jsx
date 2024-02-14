@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'//
 import { useSelector } from 'react-redux';
-import fetchUserListings from '../services/listing/fetchUserLIstings.service';
-import { MoreHorizontal } from 'lucide-react'
+import fetchUserListings from '../services/listing/fetchUserListings.service';
+import { MoreHorizontal } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 
 const UserListings = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [listings, setListings] = useState([]);
     const [showOptions, setShowOptions] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(currentUser._id);
         fetchUserListings(currentUser._id)
             .then((response) => {
                 setListings(response);
@@ -28,7 +29,7 @@ const UserListings = () => {
     }
 
     const handleView = (listingId) => {
-
+        navigate(`/listing/${listingId}`);
     }
 
     const handleEdit = (listingId) => {
